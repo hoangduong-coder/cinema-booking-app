@@ -8,5 +8,12 @@ React, Tailwind CSS, CSS, Python Fast API, PostgreSQL.
 
 ## How to run
 
-- Front-end: cd client && npm start
-- Back-end: cd api && python -m uvicorn main:app --reload
+### Front-end
+
+- Command: `cd client && npm start`
+- To run the app in development mode: Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Back-end
+
+- Command: `cd api && python -m uvicorn main:app --reload`
+- To run back-end server locally, open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to test API in FastAPI Interactive API docs
