@@ -6,6 +6,8 @@ Basic cinema booking app
 
 React, Tailwind CSS, CSS, Python Fast API, PostgreSQL.
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ## How to run
 
 ### Front-end
