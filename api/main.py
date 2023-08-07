@@ -1,12 +1,14 @@
 from util.helper import convert_to_mins
 from fastapi import FastAPI, Path
+from models import film, user
+
 app = FastAPI()
 
 film_list = {
     1: {
         "name": "Fast X",
         "length": 141,
-        "release": "17.5.2023",
+        "release": "7.5.2023",
         "language": "English",
         "genre": ["Action"]
     },
@@ -41,8 +43,21 @@ async def get_all_film():
     return result
 
 
-@app.get("/get-film/{film_id}")
-async def get_film(film_id: int = Path(description="Select ID of your film:")):
-    film_list[film_id]["length"] = convert_to_mins(
-        film_list[film_id]["length"])
-    return film_list[film_id]
+@app.get("/get-film/{search_film_id}")
+async def get_film_by_id(search_film_id: int = Path(description="Select ID of your film:")):
+    for film_id in film_list:
+        if (search_film_id == film_id):
+            film_list[search_film_id]["length"] = convert_to_mins(
+                film_list[search_film_id]["length"])
+            return film_list[search_film_id]
+    return {"Data": "Not found"}
+
+
+@app.create("/add-film")
+async def add_film(film: film.Film):
+    return film
+
+
+@app.create("/book-ticket")
+async def book_order(order: user.Order):
+    return order
