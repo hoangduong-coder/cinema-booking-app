@@ -1,26 +1,32 @@
-from pydantic import BaseModel
 from typing import List
-from api.models import Film
-from enum import Enum
+
+from pydantic import BaseModel
+
+from api.models import Screening, Seat
 
 
-class TicketType(Enum):
-    REGULAR: 1
-    CHILD: 2
-    STUDENT: 3
-    WHEELCHAIR: 4
+class User(BaseModel):
+    id: int
+    name: str
+    phone: str
+    email: str
 
 
-class Ticket(BaseModel):
-    film: Film
-    date_time: str
-    type_of_ticket: TicketType
-    quantity: int
+class TicketType(BaseModel):
+    id: int
+    type_name: str
     price: float
+
+class Reservation(BaseModel):
+    id: int
+    screening: Screening
+    ticket_type: TicketType
+    seat: Seat
 
 
 class Order(BaseModel):
-    name: str
-    email: str
-    phone: str
-    tickets: List[Ticket]
+    id: str
+    user: User
+    tickets: List[Reservation]
+    price: float
+

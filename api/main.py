@@ -1,10 +1,9 @@
-from util.helper import convert_to_mins
 from fastapi import FastAPI, Path
-from models import film, user
+from util.helper import convert_to_mins
 
 app = FastAPI()
 
-film_list = {
+movie_list = {
     1: {
         "name": "Fast X",
         "length": 141,
@@ -34,30 +33,20 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/all-film")
-async def get_all_film():
+@app.get("/all-movie")
+async def get_all_movie():
     result = []
-    for i in film_list:
-        film_list[i]["length"] = convert_to_mins(film_list[i]["length"])
-        result.append(film_list[i])
+    for i in movie_list:
+        movie_list[i]["length"] = convert_to_mins(movie_list[i]["length"])
+        result.append(movie_list[i])
     return result
 
 
-@app.get("/get-film/{search_film_id}")
-async def get_film_by_id(search_film_id: int = Path(description="Select ID of your film:")):
-    for film_id in film_list:
-        if (search_film_id == film_id):
-            film_list[search_film_id]["length"] = convert_to_mins(
-                film_list[search_film_id]["length"])
-            return film_list[search_film_id]
+@app.get("/get-movie/{search_movie_id}")
+async def get_movie_by_id(search_movie_id: int = Path(description="Select ID of your movie:")):
+    for movie_id in movie_list:
+        if (search_movie_id == movie_id):
+            movie_list[search_movie_id]["length"] = convert_to_mins(
+                movie_list[search_movie_id]["length"])
+            return movie_list[search_movie_id]
     return {"Data": "Not found"}
-
-
-@app.create("/add-film")
-async def add_film(film: film.Film):
-    return film
-
-
-@app.create("/book-ticket")
-async def book_order(order: user.Order):
-    return order
