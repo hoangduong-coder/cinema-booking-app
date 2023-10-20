@@ -1,6 +1,11 @@
-from typing import List
+from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
+
+
+class Image(BaseModel):
+    url: HttpUrl
+    name: str
 
 
 class Movie(BaseModel):
@@ -9,9 +14,8 @@ class Movie(BaseModel):
     length: int
     release_date: str
     language: str
-    genre: List[str]
-    director: str
-    cast: List[str]
+    genre: list = []
+    poster: Optional[Image] = None
 
 
 class Auditorium(BaseModel):
