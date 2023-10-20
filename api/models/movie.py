@@ -3,11 +3,6 @@ from typing import Optional
 from pydantic import BaseModel, HttpUrl
 
 
-class Image(BaseModel):
-    url: HttpUrl
-    name: str
-
-
 class Movie(BaseModel):
     id: int
     name: str
@@ -15,7 +10,7 @@ class Movie(BaseModel):
     release_date: str
     language: str
     genre: list = []
-    poster: Optional[Image] = None
+    poster: Optional[HttpUrl] = None
 
 
 class Auditorium(BaseModel):
