@@ -3,8 +3,7 @@ from typing import Optional
 from pydantic import BaseModel, HttpUrl
 
 
-class Movie(BaseModel):
-    id: int
+class MovieBase(BaseModel):
     name: str
     length: int
     release_date: str
@@ -13,10 +12,27 @@ class Movie(BaseModel):
     poster: Optional[HttpUrl] = None
 
 
+class Movie(MovieBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
+class MovieCreate(MovieBase):
+    pass
+
+
+class Cinema(BaseModel):
+    id: str
+    name: str
+    city: str
+
+
 class Auditorium(BaseModel):
     id: int
     auditorium_number: int
-    seats_amount: int
+    cinema_id: str
 
 
 class Screening(BaseModel):

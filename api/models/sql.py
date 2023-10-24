@@ -3,6 +3,8 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
+# Movie-related SQL models
+
 
 class Movie(Base):
     __tablename__ = "movies"
@@ -16,12 +18,34 @@ class Movie(Base):
     screening = relationship("Screening", back_populates="movie")
 
 
+class Cinema(Base):
+    __tablename__ = "cinemas"
+    id = Column(String(50), primary_key=True, index=True)
+    name = Column(String(50))
+    city = Column(String(50))
+    auditorium = relationship("Auditorium", back_populates="cinema")
+
+
 class Auditorium(Base):
     __tablename__ = "auditoriums"
     id = Column(String(50), primary_key=True, index=True)
-    seats_amount = Column(Integer)
-    special_seats = (ARRAY(String(5)))
+    auditorium_number = Column(Integer)
+    cinema_id = Column(String(50), ForeignKey("cinemas.id"))
+
     screening = relationship("Screening", back_populates="auditorium")
+    cinema = relationship("Cinema", back_populates="auditorium")
+    seat = relationship("Seat", back_populates="auditorium")
+
+
+class Seat(Base):
+    __tablename__ = "seats"
+    id = Column(String(50), primary_key=True, index=True)
+    row = Column(String(2))
+    number = Column(Integer)
+    special = Column(Boolean)
+    auditorium_id = Column(String(50), ForeignKey("auditoriums.id"))
+
+    auditorium = relationship("Auditorium", back_populates="seat")
 
 
 class Screening(Base):
@@ -34,6 +58,8 @@ class Screening(Base):
     movie = relationship("Movie", back_populates="screening")
     auditorium = relationship("Auditorium", back_populates="screening")
     user_reservation = relationship("Reservation", back_populates="screening")
+
+# Human-related SQL models
 
 
 class User(Base):
@@ -50,7 +76,7 @@ class Reservation(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     screening_id = Column(Integer, ForeignKey("screenings.id"))
-    ticket_type_name = Column(String(50))
+    ticket_type = Column(String(50))
     seat_code = Column(String(10))
     paid_date = Column(String(20))
     canceled = Column(Boolean)
