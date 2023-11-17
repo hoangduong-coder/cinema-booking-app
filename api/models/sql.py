@@ -20,21 +20,12 @@ class Movie(Base):
 
 class Cinema(Base):
     __tablename__ = "cinemas"
-    id = Column(String(50), primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String(50))
     city = Column(String(50))
-    auditorium = relationship("Auditorium", back_populates="cinema")
+    number_of_auditoriums = Column(Integer)
 
-
-class Auditorium(Base):
-    __tablename__ = "auditoriums"
-    id = Column(String(50), primary_key=True, index=True)
-    auditorium_number = Column(Integer)
-    cinema_id = Column(String(50), ForeignKey("cinemas.id"))
-
-    screening = relationship("Screening", back_populates="auditorium")
-    cinema = relationship("Cinema", back_populates="auditorium")
-    seat = relationship("Seat", back_populates="auditorium")
+    seat = relationship("Seat", back_populates="cinema")
 
 
 class Seat(Base):
@@ -43,9 +34,10 @@ class Seat(Base):
     row = Column(String(2))
     number = Column(Integer)
     special = Column(Boolean)
-    auditorium_id = Column(String(50), ForeignKey("auditoriums.id"))
+    auditorium = Column(Integer)
+    cinema_id = Column(String(50), ForeignKey("cinemas.id"))
 
-    auditorium = relationship("Auditorium", back_populates="seat")
+    cinema = relationship("Cinema", back_populates="seat")
 
 
 class Screening(Base):

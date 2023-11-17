@@ -23,28 +23,34 @@ class MovieCreate(MovieBase):
     pass
 
 
-class Cinema(BaseModel):
-    id: str
+class CinemaBase(BaseModel):
     name: str
     city: str
+    number_of_auditoriums: int
 
-
-class Auditorium(BaseModel):
+class Cinema(MovieBase):
     id: int
-    auditorium_number: int
-    cinema_id: str
+
+    class Config:
+        orm_mode = True
+
+
+class CinemaCreate(MovieBase):
+    pass
 
 
 class Screening(BaseModel):
     id: int
     movie: Movie
-    auditorium: Auditorium
+    cinema_id: int
+    auditorium: int
     start_time: str
 
 
 class Seat(BaseModel):
     id: str
-    auditorium: Auditorium
+    cinema_id: int
+    auditorium: int
     row: str
     number: int
     special: bool

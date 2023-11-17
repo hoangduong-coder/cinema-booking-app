@@ -1,7 +1,13 @@
-from database import SessionLocal
-from fastapi import FastAPI, Path
+from datetime import datetime
+from typing import Annotated
+
+from database import SessionLocal, engine
+from fastapi import Depends, FastAPI, Path
 from models import sql
+from sqlalchemy.orm import Session
 from util.helper import convert_to_mins
+
+from api.models.movie_models import Cinema, MovieBase
 
 app = FastAPI()
 sql.Base.metadata.create_all(bind=engine)
@@ -54,6 +60,7 @@ async def get_movie_by_id(search_movie_id: int = Path(description="Select ID of 
             return movie_list[search_movie_id]
     return {"Data": "Not found"}
 
+
 def get_db():
     db = SessionLocal()
     try:
@@ -61,4 +68,29 @@ def get_db():
     finally:
         db.close()
 
-db_dependency = An
+
+db_dependency = Annotated(Session, Depends(get_db))
+
+
+@app.post("/add-movie")
+async def create_movie(movie: MovieBase, db: db_dependency):
+    new_release_date = datetime.strptime(movie.release_date, "%d/%m/%y")
+    db_movie = sql.Movie(name=movie.name, length=movie.length, release_date=new_release_date,
+                         language=movie.language, genre=movie.genre, poster=movie.poster)
+    db.add(db_movie)
+    db.commit()
+    db.refresh(db_movie)
+
+@app.post("/add-cinema")
+async def create_movie(cinema: Cinema, db: db_dependency):
+    db_movie = sql.Cinema(name=cinema.name, city=cinema.city)
+    db.add(db_movie)
+    db.commit()
+    db.refresh(db_movie)
+
+@app.post("/add-auditorium/{cinema_id}")
+async def create_movie(cinema_id: str, db: db_dependency):
+    db_movie = sql.Cinema(name=cinema.name, city=cinema.city)
+    db.add(db_movie)
+    db.commit()
+    db.refresh(db_movie)
