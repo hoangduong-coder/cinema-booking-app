@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  scrollbar-width: thin;
+}
+
+html {
+  background-color: #190000;
+}
+
+@layer base {
+  html {
+    @apply text-white;
+  }
+}
