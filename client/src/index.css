@@ -8,8 +8,13 @@
   scrollbar-width: thin;
 }
 
+body,
 html {
-  background-color: #190000;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(to right, #434343 0%, black 100%);
 }
 
 @layer base {
