@@ -6,7 +6,7 @@ Basic cinema booking app
 
 React, Redux, CSS/Tailwind CSS, Python Fast API, PostgreSQL.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Vite](https://github.com/vitejs/vite).
 
 ## How to run
 
