@@ -1,0 +1,92 @@
+[
+  {
+    "id": 123453,
+    "name": "Title 1",
+    "length": 108,
+    "release_date": "2023-07-08",
+    "language": "English",
+    "genres": ["Action"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 978687,
+    "name": "Title 2",
+    "length": 92,
+    "release_date": "2024-03-03",
+    "language": "English",
+    "genres": ["Comedy", "Romance"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 235479,
+    "name": "Title 3",
+    "length": 110,
+    "release_date": "2023-08-01",
+    "language": "English",
+    "genres": ["Action", "Adventure"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 305867,
+    "name": "Title 4",
+    "length": 116,
+    "release_date": "2023-07-12",
+    "language": "English",
+    "genres": ["Romance", "Drama", "Comedy"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 564789,
+    "name": "Title 5",
+    "length": 89,
+    "release_date": "2023-10-09",
+    "language": "English",
+    "genres": ["Animation", "Fantasy"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 563563,
+    "name": "Title 6",
+    "length": 108,
+    "release_date": "2024-01-17",
+    "language": "English",
+    "genres": ["Action", "Historical"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 436356,
+    "name": "Title 7",
+    "length": 92,
+    "release_date": "2023-10-01",
+    "language": "English",
+    "genres": ["Action", "Thriller", "Adventure"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 648475,
+    "name": "Title 8",
+    "length": 110,
+    "release_date": "2024-04-01",
+    "language": "English",
+    "genres": ["Science-fiction", "Adventure", "Comedy", "Drama"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 132486,
+    "name": "Title 9",
+    "length": 116,
+    "release_date": "2023-08-08",
+    "language": "English",
+    "genres": ["Science-fiction", "Fantasy", "Mystery"],
+    "poster": "src/assets/sample1.jpeg"
+  },
+  {
+    "id": 321409,
+    "name": "Title 10",
+    "length": 89,
+    "release_date": "2023-12-23",
+    "language": "Vietnamese",
+    "genres": ["Animation", "Musical", "Historical"],
+    "poster": "src/assets/sample1.jpeg"
+  }
+]

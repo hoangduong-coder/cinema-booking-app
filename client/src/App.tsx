@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 
-import Error from "./pages/Error"
+import ErrorPage from "./pages/ErrorPage"
 import Root from "./pages/Root"
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     {
       path: "/",
       element: <Root />,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
     },
   ])
 
