@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import "./layout.css"
 
 import { Clapperboard, HomeIcon, Settings, User } from "lucide-react"
-import { ElementType, MouseEvent, useEffect, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
+import { ElementType } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { toggleSidebar } from "../../redux/pageStatusSlice"
 import { RootState } from "../../redux/store"
 import Logo from "./Logo"
 
@@ -33,37 +29,15 @@ const SidebarItem = ({
 }
 
 const Sidebar = () => {
-  const sidebarRef = useRef<HTMLElement>(null)
   const showSidebar = useSelector(
     (state: RootState) => state.pageStatus.showSidebar
   )
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const handleClickSidebarOutside = (
-      event: MouseEvent<Element, MouseEvent>
-    ): void => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
-      ) {
-        dispatch(toggleSidebar())
-      }
-    }
-    //@ts-ignore
-    document.addEventListener("mousedown", handleClickSidebarOutside)
-    return () => {
-      //@ts-ignore
-      document.removeEventListener("mousedown", handleClickSidebarOutside)
-    }
-  }, [sidebarRef])
 
   return (
     <aside
       className={`h-screen fixed z-[10] bg-black left-0 overflow-y-auto sm:hidden sidebar-slide-in ${
         showSidebar ? "visible" : ""
       }`}
-      ref={sidebarRef}
     >
       <div className="py-6">
         <div className="pb-4 px-4">
