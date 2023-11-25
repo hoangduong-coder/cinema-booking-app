@@ -1,0 +1,20 @@
+[
+  {
+    "id": 123,
+    "name": "Stockmann cinema",
+    "city": "Helsinki",
+    "number_of_auditoriums": 6
+  },
+  {
+    "id": 456,
+    "name": "Kamppi cinema",
+    "city": "Helsinki",
+    "number_of_auditoriums": 12
+  },
+  {
+    "id": 789,
+    "name": "Espoo city center cinema",
+    "city": "Espoo",
+    "number_of_auditoriums": 8
+  }
+]

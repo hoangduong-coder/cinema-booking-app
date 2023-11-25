@@ -52,6 +52,12 @@ const Header = () => {
       )}
       <div className="flex flex-row center space-x-4">
         <Link
+          to={"/movies"}
+          className="p-2 rounded-lg hover:bg-red-900 hidden sm:block"
+        >
+          All movies
+        </Link>
+        <Link
           to={"/"}
           className="p-2 rounded-lg hover:bg-red-900 hidden sm:block"
         >
