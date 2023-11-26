@@ -38,7 +38,7 @@ const Header = () => {
   }, [sidebarRef, showSidebar])
 
   return (
-    <div className="w-full max-w-6xl fixed flex flex-row py-2 px-6 justify-between center">
+    <div className="w-full max-w-6xl flex flex-row py-2 px-6 justify-between center">
       {screenSize.width <= 640 ? (
         <button
           className="p-2 rounded-full hover:bg-red-900"

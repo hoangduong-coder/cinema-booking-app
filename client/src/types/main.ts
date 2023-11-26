@@ -4,7 +4,7 @@ export interface Movie {
   length: number,
   release_date: string,
   language: string,
-  genre: Array<string>
+  genres: Array<string>
   poster?: string
 }
 

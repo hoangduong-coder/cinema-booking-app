@@ -24,3 +24,7 @@ export const useScreenSize = () => {
 
   return screenSize
 }
+
+export const convertTime = (time: number) => {
+  return `${Math.floor(time / 60)}h ${time % 60}mins`
+}

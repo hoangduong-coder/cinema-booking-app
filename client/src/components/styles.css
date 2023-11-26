@@ -9,6 +9,11 @@
   color: white;
 }
 
-/* ::-webkit-calendar-picker-indicator {
-  display: none;
-} */
+.react-calendar {
+  background-color: black;
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  position: absolute;
+  z-index: 1;
+  margin-top: 0;
+}

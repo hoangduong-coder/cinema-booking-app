@@ -1,30 +1,60 @@
-import "../styles.css"
+import "react-calendar/dist/Calendar.css"
 
-import { Calendar } from "lucide-react"
-import data from "../../dummy/cinema.json"
+import { useEffect, useRef, useState } from "react"
+
+import Calendar from "react-calendar"
+import cinemaList from "../../dummy/cinema.json"
+import Dropdown from "./Dropdown"
 
 const SearchBox = () => {
-  const cinemaList = [...data]
+  const calendarRef = useRef<HTMLDivElement>(null)
+
+  const [newDate, setNewDate] = useState()
+  const [showCalendar, setShowCalendar] = useState(false)
+
+  const sortByOptionList = [
+    { id: "name", name: "Name (A to Z)" },
+    { id: "trending", name: "Trending" },
+    { id: "rating", name: "Highest rating" },
+    { id: "date", name: "Latest publication date" },
+  ]
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node)
+      ) {
+        setShowCalendar(false)
+      }
+    }
+
+    document.addEventListener("click", handleOutsideClick)
+    return () => {
+      document.removeEventListener("click", handleOutsideClick)
+    }
+  }, [calendarRef])
+
   return (
-    <div className="flex flex-row w-full mb-4 space-x-2">
-      <select className="bg-transparent border-b-8 border-red text-white text-sm p-2.5 focus:ring-red w-full">
-        <option className="bg-black text-white p-2.5 hover:bg-red" selected>
-          Choose a cinema
-        </option>
-        {cinemaList.map((optionValue) => (
-          <option
-            key={optionValue.id}
-            className="bg-black text-white p-2.5 hover:bg-red"
-            value={optionValue.id}
-          >
-            {optionValue.name}
-          </option>
-        ))}
-      </select>
-      <div className="flex flex-row border-b-8 text-white text-sm p-2.5 w-full">
-        <Calendar />
-        <input type="date" className="" />
+    <div className="flex flex-col sm:flex-row w-full mb-4 sm:space-x-2">
+      <Dropdown dropdownList={cinemaList} defaultSelection="Select a cinema" />
+      <div className="w-full" ref={calendarRef}>
+        <input
+          type="text"
+          className="appearance-none w-full bg-transparent border-b-8 text-white p-2.5 border-red"
+          placeholder="Select date"
+          onClick={() => setShowCalendar(true)}
+          value={newDate ? new Date(newDate).toLocaleDateString("en-GB") : ""}
+        />
+        <Calendar
+          onChange={(date) => {
+            setNewDate(date)
+          }}
+          value={newDate}
+          className={showCalendar ? "block" : "hidden"}
+        />
       </div>
+      <Dropdown dropdownList={sortByOptionList} defaultSelection="Sort by" />
     </div>
   )
 }

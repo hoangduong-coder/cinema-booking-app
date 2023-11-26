@@ -11,7 +11,7 @@ const Root = () => {
       <Sidebar />
       <div className="w-full max-w-6xl flex flex-col">
         <Header />
-        <div className="w-full mt-14">
+        <div className="w-full">
           {location.pathname !== "/" ? <Outlet /> : <Home />}
         </div>
       </div>
