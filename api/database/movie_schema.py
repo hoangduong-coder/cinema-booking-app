@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel, HttpUrl
 
 
@@ -8,8 +6,10 @@ class MovieBase(BaseModel):
     length: int
     release_date: str
     language: str
-    genre: list = []
-    poster: Optional[HttpUrl] = None
+    genres: list = []
+    description: str
+    trailer: HttpUrl
+    poster: HttpUrl  # temporary save to a cloud storage, find a way to solve later
 
 
 class Movie(MovieBase):
@@ -25,6 +25,8 @@ class MovieCreate(MovieBase):
 
 class CinemaBase(BaseModel):
     name: str
+    address: str
+    postal_code: str
     city: str
     number_of_auditoriums: int
 
@@ -41,8 +43,8 @@ class CinemaCreate(CinemaBase):
 
 
 class ScreeningBase(BaseModel):
-    movie_id: int
-    cinema_id: int
+    movie: Movie
+    cinema: Cinema
     auditorium: int
     start_time: str
 
@@ -56,12 +58,3 @@ class Screening(ScreeningBase):
 
 class ScreeningCreate(ScreeningBase):
     pass
-
-
-class Seat(BaseModel):
-    id: str
-    cinema_id: int
-    auditorium: int
-    row: str
-    seat_number: int
-    special: bool

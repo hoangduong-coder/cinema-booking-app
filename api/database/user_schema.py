@@ -1,8 +1,7 @@
-from typing import List, Optional
+from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel
-
-from api.models import Screening, Seat
 
 
 class UserBase(BaseModel):
@@ -22,21 +21,28 @@ class User(UserBase):
         orm_mode = True
 
 
-class TicketType(BaseModel):
-    id: int
-    type_name: str
-    price: float
+class TicketType(str, Enum):
+    normal = 'NORMAL'
+    children = 'CHILDREN'
+    premium = 'PREMIUM'
+    disability = 'DISABILITY'
 
 
-class Reservation(BaseModel):
+class BookingBase(BaseModel):
     id: int
-    screening: Screening
+    screening_id: int
     ticket_type: TicketType
-    seat: Seat
-
-
-class Order(BaseModel):
-    id: str
+    seat: str
     user: User
-    tickets: List[Reservation]
-    price: float
+    paid_datetime: str
+
+
+class Booking(BookingBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
+class BookingCreate(BookingBase):
+    pass
