@@ -1,7 +1,7 @@
 from sqlalchemy import ARRAY, Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from .settings import Base
 
 # Movie-related SQL models
 
