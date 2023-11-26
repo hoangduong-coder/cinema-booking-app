@@ -41,7 +41,7 @@ class CinemaCreate(CinemaBase):
 
 
 class ScreeningBase(BaseModel):
-    movie: Movie
+    movie_id: int
     cinema_id: int
     auditorium: int
     start_time: str
@@ -63,5 +63,5 @@ class Seat(BaseModel):
     cinema_id: int
     auditorium: int
     row: str
-    number: int
+    seat_number: int
     special: bool
