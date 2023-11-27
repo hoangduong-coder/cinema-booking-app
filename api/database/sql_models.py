@@ -71,4 +71,4 @@ class Booking(Base):
     paid_datetime = Column(DateTime, server_default=func.now())
 
     screening = relationship("Screening", back_populates="booking")
-    user = relationship("User", back_populates="ticket")
+    user = relationship("User", back_populates="booking")

@@ -1,4 +1,6 @@
-from pydantic import BaseModel, HttpUrl
+from typing import List
+
+from pydantic import BaseModel
 
 
 class MovieBase(BaseModel):
@@ -6,10 +8,10 @@ class MovieBase(BaseModel):
     length: int
     release_date: str
     language: str
-    genres: list = []
+    genres: str
     description: str
-    trailer: HttpUrl
-    poster: HttpUrl  # temporary save to a cloud storage, find a way to solve later
+    trailer: str
+    poster: str  # temporary save to a cloud storage, find a way to solve later
 
 
 class Movie(MovieBase):

@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from database.movie_schema import CinemaCreate, MovieCreate
 from database.sql_models import Cinema, Movie
@@ -22,10 +22,9 @@ def get_cinema_by_id(db: Session, cinema_id: int):
 
 
 def post_movie(db: Session, new_movie: MovieCreate):
-    new_release_date = datetime.strptime(new_movie.release_date, "%d/%m/%y")
-    genres_string = ','.join([genre for genre in new_movie.genres])
+    new_release_date = datetime.strptime(new_movie.release_date, "%d/%m/%Y")
     db_movie = Movie(name=new_movie.name, length=new_movie.length, release_date=new_release_date,
-                     language=new_movie.language, genres=genres_string, poster=new_movie.poster, trailer=new_movie.trailer, description=new_movie.description)
+                     language=new_movie.language, genres=new_movie.genres, poster=new_movie.poster, trailer=new_movie.trailer, description=new_movie.description)
     db.add(db_movie)
     db.commit()
     db.refresh(db_movie)
