@@ -18,7 +18,7 @@ def get_db():
 
 
 @app.get("/all-movies", response_model=list[movie_schema.Movie])
-def read_all_movie(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
+def read_all_movie(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     movie_list = get_movies(db, skip=skip, limit=limit)
     return movie_list
 
