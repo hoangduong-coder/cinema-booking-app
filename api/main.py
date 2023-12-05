@@ -1,5 +1,6 @@
-from crud.movie import (get_cinema, get_cinema_by_id, get_movies,
-                        get_movies_by_id, post_cinema, post_movie)
+from crud.movie import (change_movie, get_cinema, get_cinema_by_id, get_movies,
+                        get_movies_by_id, post_cinema, post_movie,
+                        remove_movie)
 from database import movie_schema, sql_models
 from database.settings import SessionLocal, engine
 from fastapi import Depends, FastAPI, HTTPException
@@ -34,6 +35,16 @@ def read_movie_by_id(movie_id: int, db: Session = Depends(get_db)):
 @app.post("/add-movie", response_model=movie_schema.Movie)
 def create_movie(movie: movie_schema.MovieCreate, db: Session = Depends(get_db)):
     return post_movie(db, new_movie=movie)
+
+
+@app.put("/delete-movie/{movie_id}")
+def update_movie(movie_id: int, db: Session = Depends(get_db), **kwargs):
+    return change_movie(db, movie_id, kwargs)
+
+
+@app.delete("/delete-movie/{movie_id}")
+def delete_movie(movie_id: int, db: Session = Depends(get_db)):
+    return remove_movie(db, movie_id)
 
 
 @app.get("/all-cinemas", response_model=list[movie_schema.Cinema])
