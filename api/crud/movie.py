@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from database.movie_schema import CinemaCreate, MovieBase, MovieCreate
+from database.movie_schema import (CinemaCreate, MovieBase, MovieCreate,
+                                   MovieUpdate)
 from database.sql_models import Cinema, Movie
 from fastapi import HTTPException, Response
 from sqlalchemy.orm import Session
@@ -46,17 +47,18 @@ def remove_movie(db: Session, movie_id: int):
     if selected_movie is None:
         raise HTTPException(
             status_code=404, detail=f"Movie with id:{movie_id} is not found or has been deleted")
-    selected_movie.delete(synchronize_session=False)
+    db.delete(selected_movie)
     db.commit()
-    return Response(status_code=204, detail=f"Deleted movie with id:{movie_id} successfully.")
+    return f"Deleted movie with id:{movie_id} successfully."
 
 
-def change_movie(db: Session, movie_id: int, **kwargs):
+def change_movie(db: Session, movie_id: int, **change_args):
     selected_movie = db.query(Movie).filter(Movie.id == movie_id).first()
     if selected_movie is None:
         raise HTTPException(
             status_code=404, detail=f"Movie with id:{movie_id} is not found or has been deleted")
-    for key, new_value in kwargs.items():
-        setattr(selected_movie, key, new_value)
+    for key, new_value in change_args.items():
+        if hasattr(selected_movie, key):
+            setattr(selected_movie, key, new_value)
     db.commit()
-    return Response(status_code=204, detail=f"Update movie with id:{movie_id} successfully.")
+    return f"Update movie with id:{movie_id} successfully."

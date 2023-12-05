@@ -37,9 +37,10 @@ def create_movie(movie: movie_schema.MovieCreate, db: Session = Depends(get_db))
     return post_movie(db, new_movie=movie)
 
 
-@app.put("/delete-movie/{movie_id}")
-def update_movie(movie_id: int, db: Session = Depends(get_db), **kwargs):
-    return change_movie(db, movie_id, kwargs)
+@app.put("/update-movie/{movie_id}")
+def update_movie(movie_id: int, db: Session = Depends(get_db), change_args: movie_schema.MovieUpdate = {}):
+    new_change_args = {key: value for key, value in change_args.dict().items() if value is not None}
+    return change_movie(db, movie_id,**new_change_args)
 
 
 @app.delete("/delete-movie/{movie_id}")

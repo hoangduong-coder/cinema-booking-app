@@ -1,4 +1,4 @@
-from typing import List
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -23,6 +23,17 @@ class Movie(MovieBase):
 
 class MovieCreate(MovieBase):
     pass
+
+
+class MovieUpdate(BaseModel):
+    name: Optional[str] = None
+    length: Optional[int] = None
+    release_date: Optional[str] = None
+    language: Optional[str] = None
+    genres: Optional[str] = None
+    description: Optional[str] = None
+    trailer: Optional[str] = None
+    poster: Optional[str] = None
 
 
 class CinemaBase(BaseModel):
