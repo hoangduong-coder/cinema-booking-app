@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -30,6 +30,7 @@ class Cinema(Base):
     address = Column(String)
     postal_code = Column(String(10))
     number_of_auditoriums = Column(Integer)
+    available = Column(Boolean)
 
     screening = relationship("Screening", back_populates="cinema")
 
