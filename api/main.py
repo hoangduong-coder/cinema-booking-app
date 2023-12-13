@@ -1,8 +1,7 @@
 from database import sql_models
 from database.settings import engine
 from fastapi import FastAPI
-
-from .router import cinema, movie
+from router import cinema, movie
 
 app = FastAPI()
 sql_models.Base.metadata.create_all(bind=engine)

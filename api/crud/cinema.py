@@ -1,8 +1,7 @@
+from database.cinema_schema import CinemaCreate
+from database.sql_models import Cinema
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-
-from api.database.cinema_schema import CinemaCreate
-from api.database.sql_models import Cinema
 
 
 def get_cinema(db: Session, skip: int = 0, limit: int = 100):

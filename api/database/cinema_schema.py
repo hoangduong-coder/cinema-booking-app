@@ -1,8 +1,7 @@
 from typing import Optional
 
+from database.movie_schema import Movie
 from pydantic import BaseModel
-
-from api.database.movie_schema import Movie
 
 
 class CinemaBase(BaseModel):

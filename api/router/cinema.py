@@ -1,10 +1,8 @@
+from crud import cinema
+from database import cinema_schema
+from database.settings import get_db
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
-from api.crud import cinema
-from api.database.settings import get_db
-
-from ..database import cinema_schema
 
 router = APIRouter(prefix="/cinema", tags=["cinema"])
 
